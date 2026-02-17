@@ -16,7 +16,7 @@ namespace Welcome
 
             UserViewModel userViewModel = new UserViewModel(user);
             UserView userView = new UserView(userViewModel);    
-            userView.Display();
+            userView.DisplayWelcomePage();
 
             Console.ReadLine(); 
 

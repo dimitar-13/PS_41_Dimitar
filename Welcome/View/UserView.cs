@@ -17,10 +17,16 @@ namespace Welcome.View
             this.userViewModel = userViewModel;
         }
 
-        public void Display()
+        public void DisplayWelcomePage()
         {
-            string text = string.Format("Welcome \n User:{0}\n Roles:{1}",userViewModel.UserName,userViewModel.UserRole.ToString());
+            string text = string.Format("Welcome\nUser:{0}\n Roles:{1}", userViewModel.UserName, userViewModel.UserRole.ToString());
 
+            Console.WriteLine(text);
+        }
+
+        public void DisplayUserInfo()
+        {
+            string text = string.Format("User Info\nUser:{0}\nFacultyNumber:{1}\nEmail:{2}", userViewModel.UserName, userViewModel.FacultyNumber, userViewModel.Email);
             Console.WriteLine(text);
         }
     }
