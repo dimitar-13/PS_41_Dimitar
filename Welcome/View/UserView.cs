@@ -29,5 +29,10 @@ namespace Welcome.View
             string text = string.Format("User Info\nUser:{0}\nFacultyNumber:{1}\nEmail:{2}", userViewModel.UserName, userViewModel.FacultyNumber, userViewModel.Email);
             Console.WriteLine(text);
         }
+
+        public void DisplayError()
+        {
+            throw new Exception("Testing exception!");
+        }
     }
 }
