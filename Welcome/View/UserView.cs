@@ -23,5 +23,10 @@ namespace Welcome.View
 
             Console.WriteLine(text);
         }
+
+        public void DisplayError()
+        {
+            throw new Exception("Testing exception!");
+        }
     }
 }
