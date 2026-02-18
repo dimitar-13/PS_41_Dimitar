@@ -16,8 +16,8 @@ namespace Welcome.ViewModel
         public string UserName { get {return this.user.Name; } set { this.user.Name = value; } }
 
         public string UserPassword {
-            get {return PasswordEncryptionHelper.DecryptPassword(this.user.Password); } 
-            set {this.user.Password = PasswordEncryptionHelper.EncryptPassword(value); } 
+            get {return this.user.Password; } 
+            set {this.user.Password = value; } 
         }
 
         public UserRoleEnum UserRole { get {return this.user.Role; } set {this.user.Role = value; } }

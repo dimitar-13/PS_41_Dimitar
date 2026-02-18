@@ -13,16 +13,27 @@ namespace WelcomeExtended.Others
     public class Delegates
     {
         public static readonly ILogger logger = LoggerHelper.GetLogger("Hello");
-        public static readonly ILogger fileLogger = LoggerHelper.GetFileLogger("Hello File");
+        public static readonly ILogger fileLogger = LoggerHelper.GetFileLogger("FileLogger");
+        public static readonly ILogger UserLoginLogger = LoggerHelper.GetFileLogger("UserLogin");
+        public static readonly ILogger UserFailedLoginLogger = LoggerHelper.GetFileLogger("UserFailedAttempt");
+
 
         public static void Log(string error)
         {
             Delegates.logger.LogError(error);
         }
 
-        public static void LogToFile(string error)
+        public static void LogToFile(string message)
         {
-            Delegates.fileLogger.LogError(error);
+            Delegates.fileLogger.LogInformation(message);
+        }
+        public static void LogUserLogin(string message)
+        {
+            Delegates.UserLoginLogger.LogInformation(message);
+        }
+        public static void LogUserFailedLoginAttempt(string error)
+        {
+            Delegates.UserFailedLoginLogger.LogInformation(error);
         }
 
         public static void LogById(int eventId)
