@@ -2,16 +2,17 @@
 using System.Collections.Concurrent;
 using System.Text;
 
-namespace WelcomeExtended.Loggers
+namespace WelcomeExtended.Loggers.FileLoggers
 {
     public class FileLogger : ILogger
     {
-        private static string FILE_PATH = "../../../logs/log.txt";
+        private string filePath;
         private readonly string name;
 
         public FileLogger(string name)
         {
             this.name = name;
+            filePath = $"../../../logs/{this.name}_log.txt";
         }
 
         public IDisposable? BeginScope<TState>(TState state) where TState : notnull
@@ -32,17 +33,17 @@ namespace WelcomeExtended.Loggers
             stringBuilder.AppendFormat("[{0}]", name);
             stringBuilder.Append(formatter(state, exception));
 
-            this.WriteToFile(stringBuilder.ToString());
+            WriteToFile(stringBuilder.ToString());
         }
 
         private void WriteToFile(string message)
         {
             try
             {
-                using(var fileStream = new FileStream(FileLogger.FILE_PATH, FileMode.Create, FileAccess.Write))
+                using(var fileStream = new FileStream(filePath, FileMode.Append, FileAccess.Write))
                 {
-                    var bytes = Encoding.UTF8.GetBytes(message);
-                    fileStream.Write(bytes, 0, bytes.Length);
+                    var bytes = Encoding.UTF8.GetBytes(message + '\n');
+                    fileStream.Write(bytes);
                 }
             }
             catch (Exception ex)

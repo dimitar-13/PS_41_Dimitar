@@ -2,6 +2,7 @@
 using Welcome.Others;
 using Welcome.View;
 using Welcome.ViewModel;
+using WelcomeExtended.Data;
 using WelcomeExtended.Helpers;
 using WelcomeExtended.Loggers;
 using WelcomeExtended.Others;
@@ -12,57 +13,66 @@ namespace WelcomeExtended
     {
         static void Main(string[] args)
         {
+            UserData userData = new UserData();
+            User studentOne = new User
+            {
+                Name = "student",
+                Password = "123",
+                Role = UserRoleEnum.STUDENT,
+                FacultyNumber = "123456",
+            };
+            userData.AddUser(studentOne);
+            User studentTwo = new User
+            {
+                Name = "student2",
+                Password = "123",
+                Role = UserRoleEnum.STUDENT,
+                FacultyNumber = "123456",
+            };
+            userData.AddUser(studentTwo);
+
+            User teacher = new User
+            {
+                Name = "Teacher",
+                Password = "1234",
+                Role = UserRoleEnum.PROFESSOR,
+                FacultyNumber = "123456",
+            };
+            userData.AddUser(teacher);
+
+            User admin = new User
+            {
+                Name = "Admin",
+                Password = "12345",
+                Role = UserRoleEnum.ADMIN,
+                FacultyNumber = "123456",
+            };
+            userData.AddUser(admin);
+
+            Console.WriteLine("Enter username");
+            string userInputUsername = Console.ReadLine();
+            Console.WriteLine("Enter password");
+            string userInputPassword = Console.ReadLine();
+
             try
             {
-                User user = new User();
-                user.Name = "John Doe";
-                user.Password = "ReallyStrongPassword";
-                user.Role = UserRoleEnum.ADMIN;
+                User sessionUser = null;
+                if (!userData.ValidateCredentials(userInputUsername, userInputPassword))
+                {
+                    Delegates.LogUserFailedLoginAttempt($"Failed to log in with credentials:" +
+                        $"name:{userInputUsername} and password:{userInputPassword} at {DateTime.UtcNow.ToString("dd.MM.yyyy")}");
+                    throw new Exception("Invalid username or password or user doesnt exist");
+                }
+                    sessionUser = userData.GetUser(userInputUsername, userInputPassword);
+                string sessionUserToString = sessionUser.ToUserString();
+                Delegates.LogUserLogin($"{sessionUserToString} logged in {DateTime.UtcNow.ToString("dd.MM.yyyy")}");
 
-                UserViewModel userViewModel = new UserViewModel(user);
-                UserView userView = new UserView(userViewModel);
-                userView.DisplayWelcomePage();
-
-                // Throws exception for testing
-                userView.DisplayError();
-                Console.ReadLine();
+                Console.WriteLine(sessionUserToString);
             }
             catch (Exception ex)
             {
                 var log = new ActionOnError(Delegates.Log);
                 log(ex.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Everything is executed");
-            }
-
-            // Testing Logger logic
-            try
-            {
-                User user = new User();
-                user.Name = "John Doe";
-                user.Password = "ReallyStrongPassword";
-                user.Role = UserRoleEnum.ADMIN;
-
-                UserViewModel userViewModel = new UserViewModel(user);
-                UserView userView = new UserView(userViewModel);
-                userView.DisplayWelcomePage();
-
-                // Throws exception for testing
-                userView.DisplayError();
-
-                Console.ReadLine();
-
-
-                Delegates.LogAll();
-
-                Delegates.LogById(0);
-                   
-
-            } catch(Exception ex)
-            {
-                Delegates.LogToFile(ex.Message);
             }
         }
     }
