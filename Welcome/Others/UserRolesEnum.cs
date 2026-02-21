@@ -2,6 +2,7 @@
 {
     public enum UserRoleEnum
     {
+        NONE,
         ANONYMOUS,
         ADMIN,
         INSPECTOR,
