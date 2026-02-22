@@ -50,7 +50,8 @@ namespace DataLayer.Logger
             {
                 var newLog = new DatabaseUserLog
                 {
-                    LogMessage = formatter(state, exception)
+                    LogMessage = formatter(state, exception),
+                    EventTime = DateTime.UtcNow
                 };
 
                 using (var context = new DatabaseContext())
