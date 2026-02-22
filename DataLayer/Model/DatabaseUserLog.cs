@@ -16,5 +16,7 @@ namespace DataLayer.Model
 
         public string LogMessage { get; set; }
 
+        public DateTime EventTime { get; set; }
+
     }
 }

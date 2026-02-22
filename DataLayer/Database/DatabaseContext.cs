@@ -55,7 +55,31 @@ namespace DataLayer.Database
                 FacultyNumber = "000000",
                 Expires = DateTime.Now.AddYears(2),
             };
-            modelBuilder.Entity<DatabaseUser>().HasData(user, student, teacher);  
+
+            var userLog1 = new DatabaseUserLog
+            {
+                Id = 1,
+                EventTime = DateTime.Now.AddDays(-1),
+                LogMessage = "Added User",
+            };
+
+            var userLog2 = new DatabaseUserLog
+            {
+                Id = 2,
+                EventTime = DateTime.Now.AddDays(-1),
+                LogMessage = "Removed User",
+            };
+            var userLog3 = new DatabaseUserLog
+            {
+                Id = 3,
+                EventTime = DateTime.Now.AddDays(-3),
+                LogMessage = "Added User",
+            };
+
+            modelBuilder.Entity<DatabaseUser>().HasData(user, student, teacher);
+
+            modelBuilder.Entity<DatabaseUserLog>().HasData(userLog1, userLog2, userLog3);
+
         }
     }
 }
