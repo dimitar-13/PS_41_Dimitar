@@ -1,0 +1,40 @@
+﻿using MinimalMVVM.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace MinimalMVVM.View
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        public void SwitchDataContext(object sender, RoutedEventArgs e)
+        {
+            var isPresenter = (this.DataContext as Presenter) != null;
+            if (isPresenter)
+            {
+                this.DataContext = new ToLowerViewModel();
+            }
+            else
+            {
+                this.DataContext = new Presenter();
+            }
+        }
+    }
+}
