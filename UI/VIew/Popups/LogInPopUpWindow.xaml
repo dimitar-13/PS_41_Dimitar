@@ -1,14 +1,12 @@
-﻿<Window x:Class="UI.Windows.MainWindow"
+﻿<Window x:Class="UI.VIew.Popups.LogInPopUpWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UI"
-        xmlns:local2="clr-namespace:UI.Components"
+        xmlns:local="clr-namespace:UI.VIew.Popups"
         mc:Ignorable="d"
-        Title="List of all students" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
+        Title="LogInPopUpWindow" Height="190" Width="358">
     <Grid>
-        <local2:StudentsList x:Name="StudentsListControl"  Padding="2"/>
+        <TextBlock Text="{Binding Message}" Margin="35,58,35,58" />
     </Grid>
 </Window>

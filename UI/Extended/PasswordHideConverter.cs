@@ -11,7 +11,6 @@ namespace UI.Extended
 {
     public class PasswordHideConverter : IValueConverter
     {
-        private string chashedPassword;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try

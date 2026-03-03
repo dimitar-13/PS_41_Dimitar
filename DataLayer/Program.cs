@@ -14,15 +14,12 @@ class Program
 {
     public static UserService userService;
     public static List<User> users;
-    public static DataBaseLogger dbLogger;
     static void Main(string[] args)
     {
         using (var ctx = new DatabaseContext())
             ctx.Database.EnsureCreated();
 
-        dbLogger = new DataBaseLogger("DbLogger");
-
-        userService = new UserService(dbLogger);
+        userService = new UserService();
         users = new List<User>();
 
 
