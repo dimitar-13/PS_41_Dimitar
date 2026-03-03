@@ -1,10 +1,13 @@
-﻿namespace Welcome
+﻿using Welcome.ViewModel;
+using Welcome.Model;
+using Welcome.View;
+
+namespace Welcome
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
         }
     }
 }
