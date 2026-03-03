@@ -17,11 +17,6 @@ namespace DataLayer.Service
     {
         private DataBaseLogger logger = new DataBaseLogger(nameof(UserService));
 
-        public UserService(DataBaseLogger logger)
-        {
-            this.logger = logger;
-        }
-
         public int AddUser(User user)
         {
             using (var context = new DatabaseContext())

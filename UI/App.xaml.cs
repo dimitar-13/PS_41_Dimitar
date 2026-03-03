@@ -1,7 +1,10 @@
 ﻿using DataLayer.Database;
+using DataLayer.Logger;
+using DataLayer.Service;
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using UI.ViewModel;
 
 namespace UI
 {
